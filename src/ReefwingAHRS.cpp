@@ -535,11 +535,13 @@ void LSM9DS1::begin() {
   //  Default configuration
   OSR = ADC_4096;                 // set pressure amd temperature oversample rate
   Godr = GODR_238Hz;              // gyro data sample rate
-  Gbw = GBW_med;                  // gyro data bandwidth
+  // Gbw = GBW_med;                  // gyro data bandwidth
+  Gbw = GBW_highest;
   Aodr = AODR_238Hz;              // accel data sample rate
   Abw = ABW_50Hz;                 // accel data bandwidth
   Modr = MODR_10Hz;               // mag data sample rate
-  Mmode = MMode_HighPerformance;  // magnetometer operation mode
+  // Mmode = MMode_HighPerformance;  // magnetometer operation mode
+  Mmode = MMode_LowPower;
   fusionThreshold = 0.5;          // fusion filter stationary threshold (DPS)
   fusionPeriod = 0.01f;           // fusion filter estimated sample period (s)
 
@@ -918,7 +920,7 @@ void LSM9DS1::setAccResolution(Ascale ascale) {
       aRes = 2.0/32768.0;
       break;
     case Ascale::AFS_16G:
-      aRes = 16.0/32768.0;
+      aRes = 24.0/32768.0;
       break;
     case Ascale::AFS_4G:
       aRes = 4.0/32768.0;
